@@ -3,6 +3,7 @@
 // Date: 09.19.2017
 ///////////////////////////////////////////////////////////////////////////////////////////
 var priv_vars = require ('./private.js');
+console.log(priv_vars.twitch_password);
 
 // Admin users
 var admin_users = [
