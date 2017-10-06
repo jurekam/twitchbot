@@ -1,12 +1,12 @@
-// Simple Twitch Bot (Bl00dBott)
-// By: Bl00dLuSt6969
+// Simple Twitch Bot
+// By: jurekam
 // Date: 09.19.2017
 ///////////////////////////////////////////////////////////////////////////////////////////
 var priv_vars = require ('./private.js');
 
 // Admin users
 var admin_users = [
-  'bl00dlust6969'
+  priv_vars.twitch_owner
 ];
 
 // Channel response definitions, '|' seperated.  I.E. '!req|message to send to channel'
@@ -31,11 +31,11 @@ var options = {
     reconnect: true
   },
   identity: {
-    username: "Bl00dBott",
+    username: priv_vars.twitch_botuser,
     password: priv_vars.twitch_password
   },
 
-  channels: ["#Bl00dLuSt6969"]
+  channels: [priv_vars.twitch_channels]
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ client.connect();
 
 // Send message on connect
 client.on("connected", function(address, port){
-  client.whisper("Bl00dLuSt6969", "I'm here");
+  client.whisper(priv_vars.twitch_owner, "I'm here");
 });
 
 // Respond to channel commands
@@ -115,7 +115,7 @@ function GetViewerCount(callback) {
   //console.log("GetViewerCount called");
 
   // Get Chatter Data
-  request('http://tmi.twitch.tv/group/user/bl00dlust6969/chatters', function (error, response, body) {
+  request('http://tmi.twitch.tv/group/user/' + priv_vars.twitch_owner + '/chatters', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       data = JSON.parse(body);
       //console.log(data.chatters);
