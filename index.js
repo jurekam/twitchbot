@@ -2,11 +2,12 @@
 // By: jurekam
 // Date: 09.19.2017
 ///////////////////////////////////////////////////////////////////////////////////////////
-var priv_vars = require ('./private.js');
+var config = require('./config.json');
+var priv_config = require('./private.json');
 
 // Admin users
 var admin_users = [
-  priv_vars.twitch_owner
+  config.twitch_owner
 ];
 
 // Channel response definitions, '|' seperated.  I.E. '!req|message to send to channel'
@@ -31,11 +32,11 @@ var options = {
     reconnect: true
   },
   identity: {
-    username: priv_vars.twitch_botuser,
-    password: priv_vars.twitch_password
+    username: config.twitch_botuser,
+    password: priv_config.twitch_botpassword
   },
 
-  channels: [priv_vars.twitch_channels]
+  channels: [config.twitch_channels]
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +48,7 @@ client.connect();
 
 // Send message on connect
 client.on("connected", function(address, port){
-  client.whisper(priv_vars.twitch_owner, "I'm here");
+  client.whisper(config.twitch_owner, "I'm here");
 });
 
 // Respond to channel commands
@@ -115,7 +116,7 @@ function GetViewerCount(callback) {
   //console.log("GetViewerCount called");
 
   // Get Chatter Data
-  request('http://tmi.twitch.tv/group/user/' + priv_vars.twitch_owner + '/chatters', function (error, response, body) {
+  request('http://tmi.twitch.tv/group/user/' + config.twitch_owner + '/chatters', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       data = JSON.parse(body);
       //console.log(data.chatters);
