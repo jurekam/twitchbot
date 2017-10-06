@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////
 // Simple Twitch Bot
 // By: jurekam
 // Date: 09.19.2017
@@ -7,7 +8,8 @@ var priv_config = require('./private.json');
 
 // Admin users
 var admin_users = [
-  config.twitch_owner
+  config.twitch_owner,
+  config.twitch_adminusers
 ];
 
 // Channel response definitions, '|' seperated.  I.E. '!req|message to send to channel'
